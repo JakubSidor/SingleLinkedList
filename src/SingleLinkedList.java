@@ -73,6 +73,11 @@ public class SingleLinkedList <V> {
 
         decreaseCounter();
 
+
+        if(index < 0)
+        {
+            throw new IllegalArgumentException("Index can not be negative!");
+        }
         if(index == 0)
         {
             data = first.data;
@@ -91,7 +96,7 @@ public class SingleLinkedList <V> {
 
             if(temp==null)
             {
-                return null;
+                throw new IllegalArgumentException("Element at this index does not exist!");
             }
 
             temp = temp.next;
@@ -106,6 +111,10 @@ public class SingleLinkedList <V> {
     private void decreaseCounter(){
         if(size>0){
             size--;
+        }
+        else
+        {
+            throw new IllegalStateException("Cannot remove element, list is already empty!");
         }
     }
 
@@ -147,6 +156,8 @@ public class SingleLinkedList <V> {
     public V removeLast()
     {
         Element temp = first;
+
+        decreaseCounter();
 
         while (temp.next!= last){
             temp = temp.next;

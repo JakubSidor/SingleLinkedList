@@ -11,43 +11,108 @@ class SingleLinkedListTest {
     void setUp(){
         singleLinkedList = new SingleLinkedList<>();
 
-        singleLinkedList.add("Abc");
-        singleLinkedList.add("Qwe");
-        singleLinkedList.add("Fgt");
-        singleLinkedList.add("Hml");
+        singleLinkedList.add("Element1");
+        singleLinkedList.add("Element2");
+        singleLinkedList.add("Element3");
+        singleLinkedList.add("Element4");
     }
 
     @Test
     void remove_first_value_by_index() {
 
         assertEquals(singleLinkedList.remove(0),
-                "Abc");
+                "Element1");
         assertEquals(singleLinkedList.remove(0),
-                "Qwe");
+                "Element2");
+        assertEquals(singleLinkedList.remove(0),
+                "Element3");
+        assertEquals(singleLinkedList.remove(0),
+                "Element4");
+
+    }
+
+
+    @Test
+    void try_to_remove_value_from_too_big_index() {
+
+        String message = "Exception has not been occured!";
+
+
+        try{
+            singleLinkedList.remove(10);
+        }
+        catch (Exception exception)
+        {
+           message = exception.getMessage();
+        }
+
+        assertEquals("Element at this index does not exist!", message);
+
+    }
+
+    @Test
+    void try_to_remove_value_from_negative_index() {
+
+        String message = "Exception has not been occured!";
+
+        try{
+            singleLinkedList.remove(-1);
+        }
+        catch (IllegalArgumentException exception)
+        {
+            message = exception.getMessage();
+
+        }
+        assertEquals("Index can not be negative!", message);
+
+    }
+
+    @Test
+    void remove_from_empty_list() {
+
+        singleLinkedList.clear();
+
+        try{
+            singleLinkedList.removeLast();
+        }
+        catch (IllegalStateException exception)
+        {
+            assertEquals("Cannot remove element, list is already empty!", exception.getMessage());
+        }
+
+    }
+
+    @Test
+    void clear_list() {
+
+        singleLinkedList.clear();
+
+        assertEquals(0, singleLinkedList.size());
+
     }
 
     @Test
     void remove_value_by_index() {
 
         assertEquals(singleLinkedList.remove(3),
-                "Hml");
+                "Element4");
         assertEquals(singleLinkedList.remove(2),
-                "Fgt");
+                "Element3");
     }
 
     @Test
     void remove_value_by_object(){
 
-        assertEquals("Qwe",singleLinkedList.remove("Qwe"));
+        assertEquals("Element2",singleLinkedList.remove("Element2"));
     }
 
     @Test
     void remove_value_from_top() {
 
-        assertEquals("Hml",
+        assertEquals("Element4",
                 singleLinkedList.removeLast());
 
-        assertEquals("Fgt",
+        assertEquals("Element3",
                 singleLinkedList.removeLast());
     }
 
@@ -55,20 +120,20 @@ class SingleLinkedListTest {
     void size(){
         assertEquals(4,singleLinkedList.size());
 
-        singleLinkedList.add("Abc");
+        singleLinkedList.add("Element5");
 
         assertEquals(5,singleLinkedList.size());
     }
 
     @Test
     void add_on_the_top(){
-        singleLinkedList.add("IOP");
-        assertEquals("IOP", singleLinkedList.removeLast());
+        singleLinkedList.add("Element5");
+        assertEquals("Element5", singleLinkedList.removeLast());
     }
 
     @Test
     void add_at_index(){
-        singleLinkedList.add("LWD",2);
-        assertEquals("LWD", singleLinkedList.remove(2));
+        singleLinkedList.add("ElementX",2);
+        assertEquals("ElementX", singleLinkedList.remove(2));
     }
 }
