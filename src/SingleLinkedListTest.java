@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class SingleLinkedListTest {
 
@@ -48,6 +48,21 @@ class SingleLinkedListTest {
 
         assertEquals("Element at this index does not exist!", message);
 
+    }
+
+    @Test
+    void copy_by_index()
+    {
+        assertEquals("Element1", singleLinkedList.copy(0));
+        assertEquals("Element2", singleLinkedList.copy(1));
+        assertEquals("Element3", singleLinkedList.copy(2));
+        assertEquals("Element4", singleLinkedList.copy(3));
+    }
+
+    @Test
+    void copy_last()
+    {
+        assertEquals("Element4", singleLinkedList.copyLast());
     }
 
     @Test
@@ -114,6 +129,19 @@ class SingleLinkedListTest {
 
         assertEquals("Element3",
                 singleLinkedList.removeLast());
+    }
+
+    @Test
+    void contains_true() {
+        assertTrue(singleLinkedList.contains("Element1"));
+        assertTrue(singleLinkedList.contains("Element2"));
+        assertTrue(singleLinkedList.contains("Element3"));
+        assertTrue(singleLinkedList.contains("Element4"));
+    }
+
+    @Test
+    void contains_false() {
+        assertFalse(singleLinkedList.contains("ElementX"));
     }
 
     @Test

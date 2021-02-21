@@ -1,7 +1,13 @@
+
+
+//Implementation of Singly Linked List
 public class SingleLinkedList <V> {
 
+    //Reference to last(top) element of list
     private Element last;
+    //Reference to first element of list
     private Element first;
+    //Size of list
     private int size = 0;
 
     //Adds element to top of the single linked list
@@ -21,6 +27,7 @@ public class SingleLinkedList <V> {
         size++;
     }
 
+    //Adds element at specified index
     public void add(V data, int index){
         Element temp = first;
 
@@ -54,11 +61,62 @@ public class SingleLinkedList <V> {
 
     }
 
+    //Checks if list contains specified piece of data
+    public boolean contains(V data)
+    {
+        Element temp = first;
+        while (temp!=null)
+        {
+            if(temp.data.equals(data))
+            {
+                return true;
+            }
+            temp = temp.next;
+        }
+
+        return false;
+    }
+
+    public V copyLast(){
+        return last.data;
+    }
+
+    public V copy(int index){
+        V data;
+        Element temp = first;
+
+        if(index < 0)
+        {
+            throw new IllegalArgumentException("Index can not be negative!");
+        }
+        if(index == 0)
+        {
+            data = first.data;
+
+            return data;
+        }
+
+        for(int i = 0; i < index - 1; i++){
+
+            if(temp==null)
+            {
+                throw new IllegalArgumentException("Element at this index does not exist!");
+            }
+
+            temp = temp.next;
+
+        }
+
+        data = temp.next.data;
+        return data;
+    }
+
     public int size()
     {
         return size;
     }
 
+    //Removes all elements from list
     public void clear(){
         first = null;
         last = null;
@@ -108,6 +166,7 @@ public class SingleLinkedList <V> {
         return data;
     }
 
+    //decreaseCounter by 1 if list is not empty
     private void decreaseCounter(){
         if(size>0){
             size--;
@@ -118,6 +177,7 @@ public class SingleLinkedList <V> {
         }
     }
 
+    //Removes and returns specified element from list
     public V remove(V element)
     {
         V data;
@@ -153,6 +213,7 @@ public class SingleLinkedList <V> {
         return null;
     }
 
+    //Removes and returns last element from list
     public V removeLast()
     {
         Element temp = first;
@@ -171,6 +232,7 @@ public class SingleLinkedList <V> {
         return data;
     }
 
+    //Iterates through all elements of list and print every piece of data
     public void printAll()
     {
         Element temp = first;
@@ -181,7 +243,7 @@ public class SingleLinkedList <V> {
         }
     }
 
-    //Contains reference to next element and instance of data object
+    //Inner class Element contains reference to next Element and one piece of data
     private class Element
     {
         public Element (V data)
@@ -189,13 +251,9 @@ public class SingleLinkedList <V> {
             this.data = data;
         }
 
-        public Element getInstance() {
-            return instance;
-        }
-
-        //Next ELEMENT IN List
-        public Element instance = this;
+        //Reference to next element and instance of data object
         public Element next = null;
+        //Piece of data
         public V data;
 
     }
